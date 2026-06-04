@@ -1,0 +1,56 @@
+---
+import "../styles/global.css";
+import { SITE } from "../data/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = `${SITE.name} - Custom business systems and legacy rescue`,
+  description = SITE.description
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jatskie.com").toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#101417" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.domain} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label={`${SITE.name} home`}>
+        <span class="brand-mark">JM</span>
+        <span>
+          <strong>{SITE.handle}</strong>
+          <small>{SITE.location}</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        {SITE.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Built for practical software, operational systems, and legacy rescue.</p>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </footer>
+  </body>
+</html>
