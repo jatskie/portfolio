@@ -1,0 +1,13 @@
+---
+import { proofItems } from "../data/site";
+---
+
+<section class="proof-strip section" aria-label="Proof points">
+  {proofItems.map((item) => (
+    <article class="proof-item">
+      <p class="eyebrow">{item.label}</p>
+      <p>{item.detail}</p>
+      {item.href && <a href={item.href} rel="noreferrer" target="_blank">Public reference</a>}
+    </article>
+  ))}
+</section>

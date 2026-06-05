@@ -1,0 +1,21 @@
+---
+import { stackGroups } from "../data/site";
+---
+
+<section class="section" id="stack">
+  <div class="section-header">
+    <p class="eyebrow">Stack</p>
+    <h2>From firmware-adjacent constraints to the frontend interface people actually use.</h2>
+  </div>
+  <div class="grid two">
+    {stackGroups.map((group) => (
+      <article class="panel">
+        <h3>{group.title}</h3>
+        <p>{group.summary}</p>
+        <ul class="tag-list">
+          {group.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

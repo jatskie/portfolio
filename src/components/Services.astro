@@ -1,0 +1,23 @@
+---
+import { services } from "../data/site";
+---
+
+<section class="section" id="services">
+  <div class="section-header">
+    <p class="eyebrow">Services</p>
+    <h2>Build what the business needs. Rescue what the business already depends on.</h2>
+    <p class="lead">I work best where software is tied to real operations: bookings, enrolments, admin workflows, devices, reporting, and systems that have to keep earning trust.</p>
+  </div>
+  <div class="grid two">
+    {services.map((service) => (
+      <article class="panel service-card">
+        <p class="eyebrow">0{services.indexOf(service) + 1}</p>
+        <h3>{service.title}</h3>
+        <p>{service.summary}</p>
+        <ul>
+          {service.bullets.map((bullet) => <li>{bullet}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

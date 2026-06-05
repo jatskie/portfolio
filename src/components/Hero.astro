@@ -1,0 +1,20 @@
+---
+import { SITE } from "../data/site";
+---
+
+<section class="hero section">
+  <p class="eyebrow">Operational systems engineer - {SITE.location}</p>
+  <h1>{SITE.tagline}</h1>
+  <p class="lead">{SITE.description}</p>
+  <div class="button-row">
+    <a class="button primary" href={SITE.primaryCta.href}>{SITE.primaryCta.label}</a>
+    <a class="button secondary" href={SITE.secondaryCta.href}>{SITE.secondaryCta.label}</a>
+  </div>
+  <div class="hero-signal" aria-label="Engineering breadth">
+    <span>C++</span>
+    <span>Hardware integration</span>
+    <span>Laravel</span>
+    <span>TypeScript</span>
+    <span>AWS</span>
+  </div>
+</section>

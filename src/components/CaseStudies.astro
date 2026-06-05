@@ -1,0 +1,39 @@
+---
+import { caseStudies, supportingWork } from "../data/site";
+---
+
+<section class="section" id="work">
+  <div class="section-header">
+    <p class="eyebrow">Selected work</p>
+    <h2>Proof from collaboration platforms, recruitment systems, and anonymized business software.</h2>
+    <p class="lead">Named where public, anonymized where commercial privacy matters.</p>
+  </div>
+  <div class="grid three case-grid">
+    {caseStudies.map((item) => (
+      <article class="panel case-card">
+        <p class="eyebrow">{item.eyebrow}</p>
+        <h3>{item.title}</h3>
+        <p>{item.summary}</p>
+        <ul>
+          {item.impact.map((impact) => <li>{impact}</li>)}
+        </ul>
+        <ul class="tag-list">
+          {item.stack.map((tag) => <li>{tag}</li>)}
+        </ul>
+        {item.href && <a class="case-link" href={item.href} rel="noreferrer" target="_blank">View public reference</a>}
+      </article>
+    ))}
+  </div>
+  <div class="supporting-work">
+    <p class="eyebrow">Additional proof</p>
+    <div class="grid three">
+      {supportingWork.map((item) => (
+        <article>
+          <h3>{item.title}</h3>
+          <p>{item.summary}</p>
+          {item.href && <a href={item.href} rel="noreferrer" target="_blank">Reference</a>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
