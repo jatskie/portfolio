@@ -1,0 +1,83 @@
+---
+import { SITE } from "../data/site";
+---
+
+<section class="section contact-section" id="contact">
+  <div class="section-header">
+    <p class="eyebrow">Contact</p>
+    <h2>Have a business system to build, modernize, or untangle?</h2>
+    <p class="lead">Send a few details and your email client will open with a prefilled message. You can also email me directly at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </div>
+  <form class="contact-form panel" id="contact-form" novalidate>
+    <label>
+      <span>Name</span>
+      <input name="name" autocomplete="name" required />
+      <small data-error-for="name"></small>
+    </label>
+    <label>
+      <span>Email</span>
+      <input name="email" type="email" autocomplete="email" required />
+      <small data-error-for="email"></small>
+    </label>
+    <label>
+      <span>Project type</span>
+      <select name="projectType">
+        <option value="">Select one</option>
+        <option>Custom business system</option>
+        <option>Legacy rescue / modernization</option>
+        <option>Booking or enrolment workflow</option>
+        <option>Hardware-integrated interface</option>
+        <option>Technical leadership</option>
+      </select>
+    </label>
+    <label>
+      <span>Budget / timeline</span>
+      <input name="budgetTimeline" placeholder="Example: this quarter, fixed scope, ongoing support" />
+    </label>
+    <label class="full">
+      <span>Message</span>
+      <textarea name="message" rows="6" required></textarea>
+      <small data-error-for="message"></small>
+    </label>
+    <div class="form-actions">
+      <button class="button primary" type="submit">Prepare email</button>
+      <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</section>
+
+<script>
+  import { buildMailto, hasContactErrors, validateContact } from "../utils/contact";
+
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+
+  function setError(field: string, message = "") {
+    const node = document.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+    if (node) node.textContent = message;
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const values = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      projectType: String(formData.get("projectType") ?? ""),
+      budgetTimeline: String(formData.get("budgetTimeline") ?? ""),
+      message: String(formData.get("message") ?? "")
+    };
+    const errors = validateContact(values);
+
+    ["name", "email", "message"].forEach((field) => setError(field));
+
+    if (hasContactErrors(errors)) {
+      Object.entries(errors).forEach(([field, message]) => setError(field, message));
+      if (status) status.textContent = "Please fix the highlighted fields.";
+      return;
+    }
+
+    if (status) status.textContent = "Opening your email client. Your message will stay here if it does not open.";
+    window.location.href = buildMailto(values);
+  });
+</script>
