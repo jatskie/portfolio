@@ -1,0 +1,21 @@
+---
+import About from "../components/About.astro";
+import CaseStudies from "../components/CaseStudies.astro";
+import Contact from "../components/Contact.astro";
+import Hero from "../components/Hero.astro";
+import ProofStrip from "../components/ProofStrip.astro";
+import Services from "../components/Services.astro";
+import Stack from "../components/Stack.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../data/site";
+---
+
+<BaseLayout title={`${SITE.name} - Custom systems and legacy rescue`} description={SITE.description}>
+  <Hero />
+  <ProofStrip />
+  <Services />
+  <CaseStudies />
+  <Stack />
+  <About />
+  <Contact />
+</BaseLayout>
