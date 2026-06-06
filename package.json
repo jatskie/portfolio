@@ -6,16 +6,23 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro check && astro build",
-    "preview": "astro preview --host 127.0.0.1",
+    "preview": "npm run build && wrangler dev",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "latest",
+    "@astrojs/cloudflare": "^13.6.1",
     "astro": "latest",
     "typescript": "latest"
   },
   "devDependencies": {
-    "vitest": "latest"
+    "vitest": "latest",
+    "wrangler": "^4.98.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
